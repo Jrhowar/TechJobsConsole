@@ -38,6 +38,43 @@ namespace TechJobsConsole
             return values;
         }
 
+
+        public static List<Dictionary<string, string>> FindByValue(string value)
+        {
+            List<Dictionary<string, string>> jobs = new List<Dictionary<string, string>>();
+            if (value == "")
+            {
+                System.Console.WriteLine("Search term must be entered");
+                return jobs;
+            }
+
+            else
+            {
+
+                // load data, if not already loaded
+                LoadData();
+
+
+
+                foreach (Dictionary<string, string> jobListing in AllJobs)
+                {
+                    foreach (KeyValuePair<string, string> data in jobListing)
+                    {
+                        string title = data.Key;
+                        string description = data.Value;
+
+                        if (title.ToLower().Contains(value) || description.ToLower().Contains(value))
+                        {
+                            jobs.Add(jobListing);
+                        }
+                    }
+
+
+                }
+                return jobs;
+            }
+        }
+
         public static List<Dictionary<string, string>> FindByColumnAndValue(string column, string value)
         {
             // load data, if not already loaded
@@ -49,7 +86,7 @@ namespace TechJobsConsole
             {
                 string aValue = row[column];
 
-                if (aValue.Contains(value))
+                if (aValue.ToLower().Contains(value))
                 {
                     jobs.Add(row);
                 }
