@@ -66,6 +66,7 @@ namespace TechJobsConsole
                         if (title.ToLower().Contains(value) || description.ToLower().Contains(value))
                         {
                             jobs.Add(jobListing);
+                            break;
                         }
                     }
 
